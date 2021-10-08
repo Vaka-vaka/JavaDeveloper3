@@ -25,6 +25,11 @@ public class UserServise {
         return userMap.get(id);
     }
 
+    //метод возврата всего
+    public List <User> getAll(Integer id) {
+        return (List<User>) userMap.values();
+    }
+
     public void remove(Integer id) {
         userMap.remove(id);
     }
