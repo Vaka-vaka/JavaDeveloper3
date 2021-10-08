@@ -17,7 +17,11 @@ public class UserServise {
     public User getUser(Integer id) {
         return userMap.get(id);
     }
-    
+
+    public void remove(Integer id) {
+        userMap.remove(id);
+    }
+
     //метод возвращае юзеров старше зазначеного року
     public List<User> getUsersOlderThan(Integer compare) {
         return userMap.values().stream()
