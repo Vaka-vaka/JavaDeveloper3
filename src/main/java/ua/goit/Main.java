@@ -15,10 +15,12 @@ public class Main {
 
     public static void main(String[] args) {
         User user = new User();
+        user.setId(1);
         user.setAge(55);
         user.setName("Aka");
         user.setSex(Sex.MALE);
         servise.putUser(user);
+        System.out.println(servise.getAll());
     }
 
 
