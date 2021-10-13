@@ -41,6 +41,13 @@ public class UserServise {
                    .collect(Collectors.toList());
     }
 
+    //метод повертає юзеров молодше зазначеного віку
+    public List<User> getUserJungleThan(Integer compare) {
+        return userMap.values().stream()
+                .filter(user -> user.getAge() < compare)
+                .collect(Collectors.toList());
+    }
+
     //метод возврата юзеров по полу
     public List<User> getUsersBySex(Sex sex) {
         return userMap.values().stream()
