@@ -8,20 +8,49 @@
 package org.example;
 
 import org.example.dao.DbHelper;
+import org.example.model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App 
 {
     public static void main( String[] args ) throws SQLException {
 
+ //       getAllUsers();
+        updateUser(null);
+    }
+
+    private static void updateUser(User user) throws SQLException {
+        try(Connection connection = DbHelper.getConnection("localhost", 5432,
+                "postgres", "postgres", "A1S5nkO/J2*33Wu");
+            Statement statement = connection.createStatement()) {
+            int i = statement.executeUpdate("update users set name = 'Vaka' where id = 2");
+            System.out.printf("Updated %s records",  i);
+        }
+    }
+
+    private static void getAllUsers() throws SQLException {
+        List<User> users = new ArrayList<>();
+
         try(Connection connection = DbHelper.getConnection("localhost", 5432,
                 "postgres", "postgres", "A1S5nkO/J2*33Wu");
             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("select * from users");
-            resultSet.next();
-            System.out.println(resultSet.getString("name"));
+            while (resultSet.next()) {
+                users.add(convertUser(resultSet));
+            }
             resultSet.close();
         }
+        System.out.println(users);
+    }
+
+    public static User convertUser(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getLong("id"));
+        user.setName(resultSet.getString("name"));
+        user.setDescription(resultSet.getString("description"));
+        return user;
     }
 }
