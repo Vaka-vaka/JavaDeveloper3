@@ -19,14 +19,18 @@ public class App
     public static void main( String[] args ) throws SQLException {
 
  //       getAllUsers();
-        updateUser(null);
+        User user = new User();
+        user.setId(2L);
+        user.setName("Aka");
+        updateUser(user);
     }
 
     private static void updateUser(User user) throws SQLException {
         try(Connection connection = DbHelper.getConnection("localhost", 5432,
                 "postgres", "postgres", "A1S5nkO/J2*33Wu");
             Statement statement = connection.createStatement()) {
-            int i = statement.executeUpdate("update users set name = 'Vaka' where id = 2");
+            String sql = "update users set name = '%s' where id = %s";
+            int i = statement.executeUpdate(String.format(sql, user.getName(), user.getId()));
             System.out.printf("Updated %s records",  i);
         }
     }
