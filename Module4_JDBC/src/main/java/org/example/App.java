@@ -20,9 +20,32 @@ public class App
 
  //       getAllUsers();
         User user = new User();
-        user.setId(2L);
-        user.setName("Aka");
-        updateUser(user);
+        user.setId(6L);
+        user.setName("normal user");
+        user.setDescription("Common user");
+        deleteUser(user);
+    }
+
+    private static void deleteUser(User user) throws SQLException {
+        try(Connection connection = DbHelper.getConnection("localhost", 5432,
+                "postgres", "postgres", "A1S5nkO/J2*33Wu");
+            Statement statement = connection.createStatement()) {
+            String sql = "delete from users where id = %s";
+            statement.execute(
+                    String.format(sql, user.getId()));
+            System.out.printf("Record was deleted ");
+        }
+    }
+
+    private static void createUser(User user) throws SQLException {
+        try(Connection connection = DbHelper.getConnection("localhost", 5432,
+                "postgres", "postgres", "A1S5nkO/J2*33Wu");
+            Statement statement = connection.createStatement()) {
+            String sql = "insert into users(name, description) values ('%s', '%s')";
+           statement.execute(
+                   String.format(sql, user.getName(), user.getDescription()));
+            System.out.printf("Record was created ");
+        }
     }
 
     private static void updateUser(User user) throws SQLException {
