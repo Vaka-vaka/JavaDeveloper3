@@ -23,6 +23,13 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- http://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.3.1</version>
+    </dependency>
   </dependencies>
 
   <build>
