@@ -11,19 +11,20 @@ import org.example.dao.DbHelper;
 import org.example.model.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class App 
 {
     public static void main( String[] args ) throws SQLException {
 
  //       getAllUsers();
+  //      DbHelper.connectToDb();
         User user = new User();
-        user.setId(6L);
-        user.setName("normal user");
+        user.setId(5L);
+        user.setName("Sakai");
         user.setDescription("Common user");
-        deleteUser(user);
+        updateUser(user);
+     //   DbHelper.closeConnection();
     }
 
     private static void deleteUser(User user) throws SQLException {
@@ -49,11 +50,14 @@ public class App
     }
 
     private static void updateUser(User user) throws SQLException {
+        String sql = "update users set name = ? where id = ?";
+
         try(Connection connection = DbHelper.getConnection("localhost", 5432,
                 "postgres", "postgres", "A1S5nkO/J2*33Wu");
-            Statement statement = connection.createStatement()) {
-            String sql = "update users set name = '%s' where id = %s";
-            int i = statement.executeUpdate(String.format(sql, user.getName(), user.getId()));
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, user.getName());
+            ps.setLong(2, user.getId());
+            int i = ps.executeUpdate();
             System.out.printf("Updated %s records",  i);
         }
     }
