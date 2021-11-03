@@ -13,18 +13,19 @@ import org.example.model.User;
 import java.sql.*;
 import java.util.*;
 
-public class App 
-{
+public class App {
     public static void main( String[] args ) throws SQLException {
+        
+        DbHelper.connectToDb();
+        
+//        User user = new User();
+//        user.setId(5L);
+//        user.setName("Sakai");
+//        user.setDescription("Common user");
+//        updateUser(user);
 
- //       getAllUsers();
-  //      DbHelper.connectToDb();
-        User user = new User();
-        user.setId(5L);
-        user.setName("Sakai");
-        user.setDescription("Common user");
-        updateUser(user);
-     //   DbHelper.closeConnection();
+        getAllUsers();
+        DbHelper.closeConnection();
     }
 
     private static void deleteUser(User user) throws SQLException {
@@ -52,27 +53,18 @@ public class App
     private static void updateUser(User user) throws SQLException {
         String sql = "update users set name = ? where id = ?";
 
-        try(Connection connection = DbHelper.getConnection("localhost", 5432,
-                "postgres", "postgres", "A1S5nkO/J2*33Wu");
-            PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, user.getName());
-            ps.setLong(2, user.getId());
-            int i = ps.executeUpdate();
-            System.out.printf("Updated %s records",  i);
-        }
-    }
+        DbHelper.executeWithPreparedStatement(sql, ps -> {
+                ps.setString(1, user.getName());
+                ps.setLong(2, user.getId());
+        });
+   }
 
     private static void getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
-
-        try(Connection connection = DbHelper.getConnection("localhost", 5432,
-                "postgres", "postgres", "A1S5nkO/J2*33Wu");
-            Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select * from users");
-            while (resultSet.next()) {
-                users.add(convertUser(resultSet));
-            }
-            resultSet.close();
+        ResultSet resultSet = DbHelper.getWithPreparedStatement(
+                "select * from users", ps -> {});
+        while (resultSet.next()) {
+            users.add(convertUser(resultSet));
         }
         System.out.println(users);
     }
