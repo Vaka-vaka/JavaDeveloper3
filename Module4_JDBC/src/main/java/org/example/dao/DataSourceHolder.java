@@ -7,9 +7,10 @@
 
 package org.example.dao;
 
-import org.postgresql.ds.PGSimpleDataSource;
-
-import javax.sql.DataSource;
+import org.postgresql.ds.*;
+import javax.sql.*;
+import java.io.FileInputStream;
+import java.util.*;
 
 public class DataSourceHolder {
 
@@ -25,6 +26,11 @@ public class DataSourceHolder {
         dataSourse.setUser("postgres");
         dataSourse.setPassword("postgres");
         this.dataSource = dataSourse;
+    }
+
+    private Properties getProperties() {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("src/main/resources/application.properties"));
     }
 
     public static DataSource getDataSource() {
