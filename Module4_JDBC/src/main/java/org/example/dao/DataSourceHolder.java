@@ -9,7 +9,6 @@ package org.example.dao;
 
 import org.example.config.AppProperties;
 import org.postgresql.ds.*;
-
 import javax.sql.*;
 import java.util.*;
 
