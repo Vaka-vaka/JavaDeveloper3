@@ -7,9 +7,10 @@
 
 package org.example.dao;
 
+import org.example.config.AppProperties;
 import org.postgresql.ds.*;
+
 import javax.sql.*;
-import java.io.FileInputStream;
 import java.util.*;
 
 public class DataSourceHolder {
@@ -19,18 +20,14 @@ public class DataSourceHolder {
     private final DataSource dataSource;
 
     private DataSourceHolder() {
-        PGSimpleDataSource dataSourse = new PGSimpleDataSource();
-        dataSourse.setServerNames(new String[]{"werty"});
-        dataSourse.setPortNumbers(new int[]{333});
-        dataSourse.setDatabaseName("postgres");
-        dataSourse.setUser("postgres");
-        dataSourse.setPassword("postgres");
-        this.dataSource = dataSourse;
-    }
-
-    private Properties getProperties() {
-        Properties properties = new Properties();
-        properties.load(new FileInputStream("src/main/resources/application.properties"));
+        Properties properties = AppProperties.getProperties();
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setServerNames(new String[]{properties.getProperty("db.host")});
+        dataSource.setPortNumbers(new int[]{Integer.parseInt(properties.getProperty("db.port"))});
+        dataSource.setDatabaseName(properties.getProperty("db.databaseName"));
+        dataSource.setUser(properties.getProperty("db.username"));
+        dataSource.setPassword(properties.getProperty("db.password"));
+        this.dataSource = dataSource;
     }
 
     public static DataSource getDataSource() {
