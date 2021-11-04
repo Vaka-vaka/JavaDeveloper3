@@ -18,48 +18,50 @@ public class App {
         
         DbHelper.connectToDb();
         
-//        User user = new User();
-//        user.setId(5L);
-//        user.setName("Sakai");
-//        user.setDescription("Common user");
-//        updateUser(user);
+//        User user = getUser(1L);
+//        if(user != null) {
+//            System.out.println(user);
+//            user.setDescription("New description for developer");
+//            //  createUser(user);
+////        deleteUser(user);
+//              updateUser(user);
+//        }
 
-        getAllUsers();
+            getAllUsers();
+
         DbHelper.closeConnection();
     }
 
-    private static void deleteUser(User user) throws SQLException {
-        try(Connection connection = DbHelper.getConnection("localhost", 5432,
-                "postgres", "postgres", "A1S5nkO/J2*33Wu");
-            Statement statement = connection.createStatement()) {
-            String sql = "delete from users where id = %s";
-            statement.execute(
-                    String.format(sql, user.getId()));
-            System.out.printf("Record was deleted ");
-        }
-    }
-
-    private static void createUser(User user) throws SQLException {
-        try(Connection connection = DbHelper.getConnection("localhost", 5432,
-                "postgres", "postgres", "A1S5nkO/J2*33Wu");
-            Statement statement = connection.createStatement()) {
-            String sql = "insert into users(name, description) values ('%s', '%s')";
-           statement.execute(
-                   String.format(sql, user.getName(), user.getDescription()));
-            System.out.printf("Record was created ");
-        }
-    }
-
-    private static void updateUser(User user) throws SQLException {
-        String sql = "update users set name = ? where id = ?";
-
-        DbHelper.executeWithPreparedStatement(sql, ps -> {
-                ps.setString(1, user.getName());
-                ps.setLong(2, user.getId());
+    private static void deleteUser(User user) {
+        String sql = "delete from users where id = ?";
+        int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
+            ps.setLong(1, user.getId());
         });
-   }
+        System.out.println("Deleted " + count + " records");
+    }
 
-    private static void getAllUsers() throws SQLException {
+    private static void createUser(User user) {
+        String sql = "insert into users(name, description) values (?, ?)";
+        int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getDescription());
+        });
+        System.out.println("Created " + count + " records");
+    }
+
+
+    private static void updateUser(User user) {
+        String sql = "update users set name = ?, description = ? where id = ?";
+
+        int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getDescription());
+            ps.setLong(3, user.getId());
+        });
+        System.out.println("Updated " + count + " records");
+    }
+
+    private static void getAllUsers() throws SQLException { //непаше ??
         List<User> users = new ArrayList<>();
         ResultSet resultSet = DbHelper.getWithPreparedStatement(
                 "select * from users", ps -> {});
@@ -67,6 +69,18 @@ public class App {
             users.add(convertUser(resultSet));
         }
         System.out.println(users);
+    }
+
+    private static User getUser(Long id) throws SQLException {
+        ResultSet resultSet = DbHelper.getWithPreparedStatement(
+                "select * from users where id = ?", ps -> {ps.setLong(1, id);});
+        if (resultSet.next()) {
+            System.out.println("Record was selected");
+            return convertUser(resultSet);
+        }else {
+            return null;
+        }
+
     }
 
     public static User convertUser(ResultSet resultSet) throws SQLException {
