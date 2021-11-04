@@ -1,8 +1,8 @@
 /**
  * JavaDeveloper3. Module 4. JDBC
  *
- *  @autor Valentin Mozul
- *  @version of 02.11.2021
+ * @autor Valentin Mozul
+ * @version of 02.11.2021
  */
 
 package org.example;
@@ -14,17 +14,17 @@ import java.sql.*;
 import java.util.*;
 
 public class App {
-    public static void main( String[] args ) throws SQLException {
-        
+    public static void main(String[] args) throws SQLException {
+
         DbHelper.connectToDb();
-        
-        User user = getUser(1L);
-        if(user != null) {
+
+        User user = getUser(4L);
+        if (user != null) {
             System.out.println(user);
             user.setDescription("New description for developer");
             //  createUser(user);
 //        deleteUser(user);
-              updateUser(user);
+            updateUser(user);
         }
 
 //            getAllUsers();
@@ -52,7 +52,6 @@ public class App {
 
     private static void updateUser(User user) {
         String sql = "update users set name = ?, description = ? where id = ?";
-
         int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
             ps.setString(1, user.getName());
             ps.setString(2, user.getDescription());
@@ -64,7 +63,8 @@ public class App {
     private static void getAllUsers() throws SQLException { //непаше ??
         List<User> users = new ArrayList<>();
         ResultSet resultSet = DbHelper.getWithPreparedStatement(
-                "select * from users", ps -> {});
+                "select * from users", ps -> {
+                });
         while (resultSet.next()) {
             users.add(convertUser(resultSet));
         }
@@ -73,14 +73,15 @@ public class App {
 
     private static User getUser(Long id) throws SQLException {
         ResultSet resultSet = DbHelper.getWithPreparedStatement(
-                "select * from users where id = ?", ps -> {ps.setLong(1, id);});
+                "select * from users where id = ?", ps -> {
+                    ps.setLong(1, id);
+                });
         if (resultSet.next()) {
             System.out.println("Record was selected");
             return convertUser(resultSet);
-        }else {
+        } else {
             return null;
         }
-
     }
 
     public static User convertUser(ResultSet resultSet) throws SQLException {
