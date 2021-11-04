@@ -20,13 +20,21 @@ public class DataSourceHolder {
 
     private DataSourceHolder() {
         Properties properties = AppProperties.getProperties();
+        PGSimpleDataSource dataSource = initPg(properties);
+        switch (properties.getProperty("db.type")) {
+            case "postgres" : initPg(properties);
+        }
+        this.dataSource = dataSource;
+    }
+
+    private PGSimpleDataSource initPg(Properties properties) {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setServerNames(new String[]{properties.getProperty("db.host")});
         dataSource.setPortNumbers(new int[]{Integer.parseInt(properties.getProperty("db.port"))});
         dataSource.setDatabaseName(properties.getProperty("db.databaseName"));
         dataSource.setUser(properties.getProperty("db.username"));
         dataSource.setPassword(properties.getProperty("db.password"));
-        this.dataSource = dataSource;
+        return dataSource;
     }
 
     public static DataSource getDataSource() {
