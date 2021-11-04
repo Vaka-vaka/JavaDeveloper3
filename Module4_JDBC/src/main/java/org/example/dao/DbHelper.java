@@ -1,8 +1,8 @@
 /**
  * JavaDeveloper3. Module 4. JDBC
  *
- *  @autor Valentin Mozul
- *  @version of 03.11.2021
+ * @autor Valentin Mozul
+ * @version of 03.11.2021
  */
 
 package org.example.dao;
@@ -36,7 +36,7 @@ public class DbHelper {
     }
 
     public static int executeWithPreparedStatement(String sql, ParameterSetter psCall) {
-        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             psCall.set(ps);
             return ps.executeUpdate();
         } catch (SQLException throwables) {
@@ -46,7 +46,7 @@ public class DbHelper {
     }
 
     public static ResultSet getWithPreparedStatement(String sql, ParameterSetter psCall) {
-        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             psCall.set(ps);
             return ps.executeQuery();
         } catch (SQLException throwables) {
@@ -56,8 +56,8 @@ public class DbHelper {
     }
 
     @FunctionalInterface
-   public interface ParameterSetter {
-        void set (PreparedStatement ps) throws SQLException;
+    public interface ParameterSetter {
+        void set(PreparedStatement ps) throws SQLException;
     }
 
 }
