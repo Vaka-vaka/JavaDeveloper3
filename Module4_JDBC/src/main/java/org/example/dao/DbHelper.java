@@ -35,13 +35,13 @@ public class DbHelper {
         );
     }
 
-    public static void executeWithPreparedStatement(String sql, ParameterSetter psCall) {
+    public static int executeWithPreparedStatement(String sql, ParameterSetter psCall) {
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             psCall.set(ps);
-            int i = ps.executeUpdate();
-            System.out.printf("Updated %s records",  i);
+            return ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return 0;
         }
     }
 
