@@ -18,16 +18,16 @@ public class App {
         
         DbHelper.connectToDb();
         
-//        User user = getUser(1L);
-//        if(user != null) {
-//            System.out.println(user);
-//            user.setDescription("New description for developer");
-//            //  createUser(user);
-////        deleteUser(user);
-//              updateUser(user);
-//        }
+        User user = getUser(1L);
+        if(user != null) {
+            System.out.println(user);
+            user.setDescription("New description for developer");
+            //  createUser(user);
+//        deleteUser(user);
+              updateUser(user);
+        }
 
-            getAllUsers();
+//            getAllUsers();
 
         DbHelper.closeConnection();
     }
