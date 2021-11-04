@@ -8,7 +8,6 @@
 package org.example.dao;
 
 import java.sql.*;
-import java.util.function.*;
 
 public class DbHelper {
     private static Connection connection;
