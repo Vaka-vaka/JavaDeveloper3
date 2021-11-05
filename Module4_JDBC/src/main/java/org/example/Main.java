@@ -19,7 +19,8 @@ public class Main {
         User user = getUser(4L);
         if (user != null) {
             System.out.println(user);
-            user.setDescription("New description for developer");
+            user.setName("Ork");
+            user.setDescription("grin");
             //  createUser(user);
       //        deleteUser(user);
             updateUser(user);
