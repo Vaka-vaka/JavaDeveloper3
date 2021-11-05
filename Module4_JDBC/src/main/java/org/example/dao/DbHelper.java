@@ -13,7 +13,8 @@ public class DbHelper {
 
     public static int executeWithPreparedStatement(String sql, ParameterSetter psCall) {
         Connection connection;
-        try {connection = DataSourceHolder.getDataSource().getConnection();
+        try {
+            connection = DataSourceHolder.getDataSource().getConnection();
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 psCall.set(ps);
                 return ps.executeUpdate();
@@ -29,7 +30,8 @@ public class DbHelper {
 
     public static ResultSet getWithPreparedStatement(String sql, ParameterSetter psCall) {
         Connection connection;
-        try {connection = DataSourceHolder.getDataSource().getConnection();
+        try {
+            connection = DataSourceHolder.getDataSource().getConnection();
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 psCall.set(ps);
                 return ps.executeQuery();
