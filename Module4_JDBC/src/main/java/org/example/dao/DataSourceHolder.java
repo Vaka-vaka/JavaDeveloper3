@@ -8,9 +8,12 @@
 package org.example.dao;
 
 import org.example.config.AppProperties;
-import org.postgresql.ds.*;
-import javax.sql.*;
-import java.util.*;
+import org.postgresql.ds.PGSimpleDataSource;
+
+
+import javax.sql.DataSource;
+import java.util.Properties;
+
 
 public class DataSourceHolder {
 
@@ -19,21 +22,21 @@ public class DataSourceHolder {
     private final DataSource dataSource;
 
     private DataSourceHolder() {
-        Properties properties = AppProperties.getProperties();
-        PGSimpleDataSource dataSource = initPg(properties);
-        switch (properties.getProperty("db.type")) {
-            case "postgres" : initPg(properties);
+        Properties props = AppProperties.getProperties();
+        PGSimpleDataSource dataSource = initPg(props);
+        switch (props.getProperty("db.type")) {
+            case "postgres" : initPg(props);
         }
         this.dataSource = dataSource;
     }
 
-    private PGSimpleDataSource initPg(Properties properties) {
+    private PGSimpleDataSource initPg(Properties props) {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setServerNames(new String[]{properties.getProperty("db.host")});
-        dataSource.setPortNumbers(new int[]{Integer.parseInt(properties.getProperty("db.port"))});
-        dataSource.setDatabaseName(properties.getProperty("db.databaseName"));
-        dataSource.setUser(properties.getProperty("db.username"));
-        dataSource.setPassword(properties.getProperty("db.password"));
+        dataSource.setServerNames(new String[]{props.getProperty("db.host")});
+        dataSource.setPortNumbers(new int[]{Integer.parseInt(props.getProperty("db.port"))});
+        dataSource.setDatabaseName(props.getProperty("db.databaseName"));
+        dataSource.setUser(props.getProperty("db.username"));
+        dataSource.setPassword(props.getProperty("db.password"));
         return dataSource;
     }
 
