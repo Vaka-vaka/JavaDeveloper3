@@ -16,19 +16,17 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        DbHelper.connectToDb();
-//        User user = getUser(4L);
-//        if (user != null) {
-//            System.out.println(user);
-//            user.setDescription("New description for developer");
-//            //  createUser(user);
-//      //        deleteUser(user);
-//            updateUser(user);
-//            user = getUser(4L);
-//            System.out.println(user);
-//        }
-            getAllUsers();
-        DbHelper.closeConnection();
+        User user = getUser(4L);
+        if (user != null) {
+            System.out.println(user);
+            user.setDescription("New description for developer");
+            //  createUser(user);
+      //        deleteUser(user);
+            updateUser(user);
+            user = getUser(4L);
+            System.out.println(user);
+        }
+         //   getAllUsers();
     }
 
     private static void deleteUser(User user) {
