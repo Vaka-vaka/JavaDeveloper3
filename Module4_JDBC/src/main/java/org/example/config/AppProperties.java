@@ -14,7 +14,7 @@ import java.util.*;
 public class AppProperties {
 
     private static AppProperties value;
-    private Properties properties;
+    private final Properties properties;
 
     private AppProperties() {
         this.properties = new Properties();
