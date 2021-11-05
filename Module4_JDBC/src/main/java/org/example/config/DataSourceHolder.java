@@ -5,9 +5,8 @@
  * @version of 04.11.2021
  */
 
-package org.example.dao;
+package org.example.config;
 
-import org.example.config.AppProperties;
 import org.postgresql.ds.PGSimpleDataSource;
 
 
