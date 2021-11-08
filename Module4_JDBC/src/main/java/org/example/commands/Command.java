@@ -7,5 +7,7 @@
 
 package org.example.commands;
 
-public class Command {
+public interface Command {
+
+    void handle(String params);
 }
