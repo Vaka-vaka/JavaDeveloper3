@@ -7,6 +7,8 @@
 
 package org.example.dao;
 
+import org.example.config.DataSourceHolder;
+
 import java.sql.*;
 
 public class DbHelper {
@@ -28,21 +30,13 @@ public class DbHelper {
        return 0;
     }
 
-    public static ResultSet getWithPreparedStatement(String sql, ParameterSetter psCall) {
+    public static ResultSet getWithPreparedStatement(String sql, ParameterSetter psCall) throws SQLException {
         Connection connection;
-        try {
-            connection = DataSourceHolder.getDataSource().getConnection();
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                psCall.set(ps);
-                return ps.executeQuery();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-                return null;
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        connection = DataSourceHolder.getDataSource().getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            psCall.set(ps);
+            return ps.executeQuery();
         }
-        return null;
     }
 
     @FunctionalInterface
