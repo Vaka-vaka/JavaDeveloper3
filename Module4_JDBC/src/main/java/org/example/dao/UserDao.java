@@ -1,42 +1,53 @@
 /**
  * JavaDeveloper3. Module 4. JDBC
  *
- *  @autor Valentin Mozul
- *  @version of 02.11.2021
+ * @autor Valentin Mozul
+ * @version of 02.11.2021
  */
 
 package org.example.dao;
 
 import org.example.model.User;
 
-import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Optional;
 
-public class UserDao implements Dao<User> {
+public class UserDao extends AbstractDao<User> {
 
-    @Override
-    public List<User> getAll() {
-        return null;
+    String getTableName() {
+        return "users";
     }
 
     @Override
-    public Optional<User> get(long id) {
+    User mapToEntity(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getLong("id"));
+        user.setName(resultSet.getString("name"));
+        user.setDescription(resultSet.getString("description"));
+        return user;
+    }
+
+    @Override
+    public Optional<User> create(User user) {
+        String sql = "insert into users(name, description) values (?, ?)";
+        int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getDescription());
+        });
+        System.out.println("Created " + count + " records");
         return Optional.empty();
     }
 
     @Override
-    public Optional<User> create(User entity) {
-        return Optional.empty();
+    public void update(User user) {
+        String sql = "update users set name = ?, description = ? where id = ?";
+        int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getDescription());
+            ps.setLong(3, user.getId());
+        });
+        System.out.println("Updated " + count + " records");
     }
-
-    @Override
-    public void update(User entity) {
-
-    }
-
-    @Override
-    public void delete(User entity) {
-
-    }
-
 
 }
