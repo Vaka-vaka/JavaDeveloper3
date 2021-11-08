@@ -23,7 +23,13 @@ public class CommandHandler {
         if (firstSpace > -1) {
             Command command = commandMap
                     .get(params.substring(0, firstSpace));
-            command.handle(params.substring(firstSpace + 1));
+            if(command != null) {
+                command.handle(params.substring(firstSpace + 1));
+            }else {
+                System.out.println("Unknown command");
+            }
+        }else {
+            System.out.println("Unknown command");
         }
     }
 
