@@ -15,7 +15,7 @@ public class CommandHandler {
     Map<String, Command> commandMap = new HashMap<>();
 
     public CommandHandler() {
-        commandMap.put("users", new CommandUsers());
+        commandMap.put("users", new UsersCommand());
     }
 
     public void handleCommand(String params) {
