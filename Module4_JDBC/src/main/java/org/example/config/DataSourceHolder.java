@@ -25,6 +25,7 @@ public class DataSourceHolder {
         PGSimpleDataSource dataSource = initPg(props);
         switch (props.getProperty("db.type")) {
             case "postgres" : initPg(props);
+            case "homeWork" : initHomeWork(props);
         }
         this.dataSource = dataSource;
     }
@@ -37,6 +38,10 @@ public class DataSourceHolder {
         dataSource.setUser(props.getProperty("db.username"));
         dataSource.setPassword(props.getProperty("db.password"));
         return dataSource;
+    }
+
+    private DataSource initHomeWork(Properties properties) {
+        return null;
     }
 
     public static DataSource getDataSource() {
