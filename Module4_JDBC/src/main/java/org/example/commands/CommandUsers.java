@@ -10,6 +10,7 @@ package org.example.commands;
 import org.example.dao.UserDao;
 import org.example.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CommandUsers implements Command {
@@ -18,27 +19,27 @@ public class CommandUsers implements Command {
 
     @Override
     public void handle(String params) {
-        int firstSpace = params.indexOf(" ");
-        if (firstSpace > -1) {
-            String subCommand = params.substring(0, firstSpace);
-            String subParams = params.substring(firstSpace + 1);
-            switch (subCommand) {
+        String[] paramsArray = params.split(" ");
+        String subParams = String.join(" ", params.replace(paramsArray[0] + " ", ""));
+            switch (paramsArray[0]) {
                 case "create":
-                    create(subParams);
+                    create(subParams);break;
                 case "get":
-                    get(subParams);
+                    get(subParams);break;
                 case "getAll":
-                    getAll();
+                    getAll();break;
                 case "delete":
-                    delete(subParams);
+                    delete(subParams);break;
                 case "update":
-                    update(subParams);
+                    update(subParams);break;
             }
         }
-    }
+
 
     private void getAll() {
-        System.out.println(userDao.getAll());
+        List<User> all = userDao.getAll();
+        System.out.println("Returned " + all.size() + " users");
+        System.out.println(all );
     }
 
     private void update(String params) { // user update ID NAME DESCRIPTION
@@ -49,6 +50,7 @@ public class CommandUsers implements Command {
           User user = optionalUser.get();
             user.setName(paramsArray[1]);
             user.setDescription(paramsArray[2]);
+            userDao.update(user);
         } else {
             System.out.println("User with id " + paramsArray[0] + " not found");
         }
