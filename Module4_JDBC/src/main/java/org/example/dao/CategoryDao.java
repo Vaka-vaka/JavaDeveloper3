@@ -36,7 +36,7 @@ public class CategoryDao extends AbstractDao<Category>{
         int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
             ps.setString(1, category.getName());
             ps.setString(2, category.getDescription());
-            ps.setLong(2, category.getParentId());
+            ps.setLong(3, category.getParentId());
         });
         System.out.println("Created " + count + " records");
         return Optional.empty();
