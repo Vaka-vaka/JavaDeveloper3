@@ -7,7 +7,7 @@
 
 package org.example;
 
-import org.example.commands.CommandHandler;
+import org.example.console.CommandHandler;
 
 import java.util.*;
 
