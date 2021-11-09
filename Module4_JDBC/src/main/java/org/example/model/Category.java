@@ -47,4 +47,14 @@ public class Category implements Identity {
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", parentId=" + parentId +
+                '}';
+    }
 }
