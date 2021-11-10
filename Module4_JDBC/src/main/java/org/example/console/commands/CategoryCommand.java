@@ -10,8 +10,6 @@ package org.example.console.commands;
 import org.example.console.Command;
 import org.example.dao.CategoryDao;
 import org.example.model.Category;
-import org.example.model.User;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +43,7 @@ public class CategoryCommand implements Command {
             Category category = optionalCategory.get();
             category.setName(paramsArray[1]);
             category.setDescription(paramsArray[2]);
+            category.setParentId(Long.parseLong(paramsArray[3]));
             categoryDao.update(category);
         } else {
             System.out.println("User with id " + paramsArray[0] + " not found");
