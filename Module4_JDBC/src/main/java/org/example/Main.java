@@ -7,22 +7,40 @@
 
 package org.example;
 
+import org.example.config.DbMigration;
 import org.example.console.CommandHandler;
-
 import java.util.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class Main {
-    public static void main(String[] args) {
 
-        System.out.println("Start application");
+        private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
-        CommandHandler commandHandler = new CommandHandler();
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            commandHandler.handleCommand(scanner.nextLine());
+        public static void main (String[]args){
+            LOGGER.debug("Start application");
+            DbMigration.migrate();
+
+            runMainApp();
+            LOGGER.info("END application");
         }
 
-        System.out.println("And application");
+        public static void runMainApp () {
+            CommandHandler commandHandler = new CommandHandler();
+            Scanner scanner = new Scanner(System.in);
+            while (scanner.hasNext()) {
+                commandHandler.handleCommand(scanner.nextLine());
+            }
+        }
     }
 
-}
+//        System.out.println("Start application");
+//
+//        CommandHandler commandHandler = new CommandHandler();
+//        Scanner scanner = new Scanner(System.in);
+//        while (scanner.hasNext()) {
+//            commandHandler.handleCommand(scanner.nextLine());
+//        }
+//
+//        System.out.println("And application");
+//    }
