@@ -40,7 +40,9 @@ public class UsersCommand implements Command {
     private void getAll() {
         List<User> all = userDao.getAll();
         System.out.println("Returned " + all.size() + " users");
-        System.out.println(all );
+        for (User user : all) {
+            System.out.println(user);
+        }
     }
 
     private void update(String params) { // user update ID NAME DESCRIPTION
