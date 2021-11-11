@@ -15,32 +15,23 @@ import java.util.logging.Logger;
 
 public class Main {
 
-        private static final Logger LOGGER = LogManager.getLogger(Main.class);
+      //  private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
         public static void main (String[]args){
-            LOGGER.debug("Start application");
-            DbMigration.migrate();
-
-            runMainApp();
-            LOGGER.info("END application");
-        }
-
-        public static void runMainApp () {
+//            LOGGER.debug("Start application");
+//            DbMigration.migrate();
+//
+//            runMainApp();
+//            LOGGER.info("END application");
+//        }
+//
+//        public static void runMainApp () {
+            System.out.println("Start application");
             CommandHandler commandHandler = new CommandHandler();
             Scanner scanner = new Scanner(System.in);
             while (scanner.hasNext()) {
                 commandHandler.handleCommand(scanner.nextLine());
             }
+            System.out.println("And application");
         }
     }
-
-//        System.out.println("Start application");
-//
-//        CommandHandler commandHandler = new CommandHandler();
-//        Scanner scanner = new Scanner(System.in);
-//        while (scanner.hasNext()) {
-//            commandHandler.handleCommand(scanner.nextLine());
-//        }
-//
-//        System.out.println("And application");
-//    }
