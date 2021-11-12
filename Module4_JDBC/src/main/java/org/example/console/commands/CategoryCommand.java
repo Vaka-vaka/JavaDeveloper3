@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class CategoryCommand implements Command {
 
-    CategoryDao categoryDao = new CategoryDao();
+    private final CategoryDao categoryDao = new CategoryDao();
 
     @Override
     public void handle(String params) {
