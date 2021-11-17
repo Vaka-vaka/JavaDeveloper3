@@ -1,0 +1,70 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+.idea/compiler.xml
+.idea/dbnavigator.xml
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/uiDesigner.xml
+target/classes/application.properties
+.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml
+.idea/libraries/Maven__junit_junit_4_11.xml
+.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_2.xml
+.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_11_2.xml
+.idea/libraries/Maven__org_checkerframework_checker_qual_3_5_0.xml
+.idea/libraries/Maven__org_flywaydb_flyway_core_8_0_2.xml
+.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
+.idea/libraries/Maven__org_javassist_javassist_3_28_0_GA.xml
+.idea/libraries/Maven__org_postgresql_postgresql_42_2_18.xml
+.idea/libraries/Maven__org_reflections_reflections_0_10_2.xml
+.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_32.xml
+.idea/modules.xml
+ProjectManagementSystem.iml
+src/.idea/dbnavigator.xml
+src/.idea/misc.xml
+src/.idea/modules.xml
+src/.idea/runConfigurations.xml
+src/.idea/vcs.xml
+src/.idea/workspace.xml
+.idea/libraries/Maven__org_postgresql_postgresql_42_3_1.xml
+.idea/libraries/Maven__org_postgresql_postgresql_42_3_1.xml
+.idea/libraries/Maven__junit_junit_4_13_2.xml
+module5Http.iml
+target/classes/db/migration/V1.0.0__Tables_creation.sql
+target/classes/db/migration/V1.0.1__Population_of_tables.sql
+target/classes/db/migration/V1.0.2__Adding_cost_to_projects.sql
+target/classes/db/migration/V1.0.3__Adding_salary_to_developers.sql
+target/classes/db/migration/V1.0.4__Adding_creation_time_to_projects.sql
+target/classes/db/migration/V1.0.5__Adding_creation_view_to_list_middleDevelopers.sql
+src/main/java/ua/goit/console/commands/PrintInfoCommand.java
+target/classes/db/migration/sum_salary_developers_project.sql
+target/classes/log4j2.xml
+target/classes/db/migration/V1.0.7__Adding_creation_sum_salary_developers_project.sql
+target/classes/db/migration/V1.0.5__Adding_creation_view_to_list_java_developers.sql
+target/classes/db/migration/V1.0.6__Adding_creation_view_to_list_middleDevelopers.sql
+target/classes/db/migration/V1.0.8__Adding_creation_list_projects.sql
+target/classes/db/migration/V1.0.9__Adding_creation_list_developers_project.sql
