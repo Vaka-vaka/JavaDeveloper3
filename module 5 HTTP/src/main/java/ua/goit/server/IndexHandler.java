@@ -14,12 +14,22 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class IndexHandler implements HttpHandler {
+
+    private TemplateHandler templateHandler = TemplateHandler.getInstance();
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        if("get".equalsIgnoreCase(exchange.getRequestMethod())) {
+           handleGet(exchange);
+        }
 
-        exchange.sendResponseHeaders(500, 0);
+    }
+
+    private void handleGet(HttpExchange exchange) throws IOException {
         OutputStream responseBody = exchange.getResponseBody();
-        responseBody.write("Hello".getBytes());
+        String index = templateHandler.getTempLate("index");
+        responseBody.write(index.getBytes());
+        exchange.sendResponseHeaders(200, index.length());
         responseBody.close();
     }
 }
