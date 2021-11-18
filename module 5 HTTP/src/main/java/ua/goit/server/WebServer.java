@@ -1,3 +1,10 @@
+/**
+ * Module 5. HTTP
+ *
+ * @autor Valentin Mozul
+ * @version of 18.11.2021
+ */
+
 package ua.goit.server;
 
 import com.sun.net.httpserver.HttpServer;
@@ -24,8 +31,11 @@ public class WebServer {
     }
 
     public static void main(String[] args) {
-        WebServer server = new WebServer();
-        server.start();
+//        WebServer server = new WebServer();
+//        server.start();
+
+        String index = TemplateHandler.getInstance().getTempLate("index");
+        System.out.println(index);
     }
 
 }
