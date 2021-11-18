@@ -31,11 +31,8 @@ public class WebServer {
     }
 
     public static void main(String[] args) {
-//        WebServer server = new WebServer();
-//        server.start();
-
-        String index = TemplateHandler.getInstance().getTempLate("index");
-        System.out.println(index);
+        WebServer server = new WebServer();
+        server.start();
     }
 
 }
