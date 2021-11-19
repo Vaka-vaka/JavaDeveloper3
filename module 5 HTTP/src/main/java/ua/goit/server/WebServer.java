@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
 
 public class WebServer {
 
@@ -22,8 +23,9 @@ public class WebServer {
         try {
             HttpServer server = HttpServer.create(
                     new InetSocketAddress("localhost", 80), 0);
-
             server.createContext("/", new IndexHandler());
+            server.createContext("/users", new UserHandler());
+            server.setExecutor(Executors.newFixedThreadPool(10));
             server.start();
         } catch (IOException e) {
            LOGGER.error("Problem with starting web server", e);
