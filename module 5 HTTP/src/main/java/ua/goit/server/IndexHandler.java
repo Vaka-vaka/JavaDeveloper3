@@ -8,28 +8,19 @@
 package ua.goit.server;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class IndexHandler implements HttpHandler {
-
-    private TemplateHandler templateHandler = TemplateHandler.getInstance();
+public class IndexHandler extends AbstractHandler {
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {
-        if("get".equalsIgnoreCase(exchange.getRequestMethod())) {
-           handleGet(exchange);
-        }
-
+    String getTempLateName() {
+        return "index";
     }
 
-    private void handleGet(HttpExchange exchange) throws IOException {
-        OutputStream responseBody = exchange.getResponseBody();
-        String index = templateHandler.getTempLate("index");
-        responseBody.write(index.getBytes());
-        exchange.sendResponseHeaders(200, index.length());
-        responseBody.close();
+    @Override
+    protected void get(HttpExchange exchange) {
+
     }
 }
