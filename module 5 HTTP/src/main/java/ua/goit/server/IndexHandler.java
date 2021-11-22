@@ -9,9 +9,6 @@ package ua.goit.server;
 
 import com.sun.net.httpserver.HttpExchange;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 public class IndexHandler extends AbstractHandler {
 
     @Override
@@ -22,5 +19,6 @@ public class IndexHandler extends AbstractHandler {
     @Override
     protected void get(HttpExchange exchange) {
 
+        handleResponse(exchange);
     }
 }
