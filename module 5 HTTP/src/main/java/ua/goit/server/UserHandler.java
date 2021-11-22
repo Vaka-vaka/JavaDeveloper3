@@ -26,7 +26,7 @@ public class UserHandler implements HttpHandler {
 
     private void handleGet(HttpExchange exchange) throws IOException {
         OutputStream outputStream = exchange.getResponseBody();
-        String index = templateHandler.getTempLate("index");
+        String index = templateHandler.getTempLate("users");
         exchange.sendResponseHeaders(200, index.length());
         outputStream.write(index.getBytes());
         outputStream.close();
