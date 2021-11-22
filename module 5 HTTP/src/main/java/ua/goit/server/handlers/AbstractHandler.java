@@ -5,12 +5,13 @@
  * @version of 18.11.2021
  */
 
-package ua.goit.server;
+package ua.goit.server.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.goit.server.TemplateHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;

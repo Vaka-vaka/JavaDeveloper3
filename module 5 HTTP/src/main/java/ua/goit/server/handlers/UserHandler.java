@@ -5,20 +5,19 @@
  * @version of 18.11.2021
  */
 
-package ua.goit.server;
+package ua.goit.server.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 
-public class IndexHandler extends AbstractHandler {
+public class UserHandler extends AbstractHandler {
 
     @Override
     String getTempLateName() {
-        return "index";
+        return "users";
     }
 
     @Override
-    protected void get(HttpExchange exchange) {
-
+    protected void get(HttpExchange exchange){
         handleResponse(exchange);
-    }
+    };
 }

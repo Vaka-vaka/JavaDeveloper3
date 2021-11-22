@@ -10,6 +10,9 @@ package ua.goit.server;
 import com.sun.net.httpserver.HttpServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.goit.server.handlers.GeneralGetHandler;
+import ua.goit.server.handlers.IndexHandler;
+import ua.goit.server.handlers.UserHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -25,6 +28,8 @@ public class WebServer {
                     new InetSocketAddress("localhost", 80), 0);
             server.createContext("/", new IndexHandler());
             server.createContext("/users", new UserHandler());
+            server.createContext("/developers", new GeneralGetHandler("developers"));
+            server.createContext("/skills", new GeneralGetHandler("skills"));
             server.setExecutor(Executors.newFixedThreadPool(10));
             server.start();
         } catch (IOException e) {
