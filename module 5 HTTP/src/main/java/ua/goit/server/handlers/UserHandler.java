@@ -9,6 +9,8 @@ package ua.goit.server.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import java.util.Map;
+
 public class UserHandler extends AbstractHandler {
 
     @Override
@@ -18,6 +20,9 @@ public class UserHandler extends AbstractHandler {
 
     @Override
     protected void get(HttpExchange exchange){
-        handleResponse(exchange);
-    };
+        handleResponse(exchange, Map.of(
+                "usersName", "Valera",
+                "usersDetail", "Kurochkin"
+        ));
+    }
 }
