@@ -9,11 +9,15 @@ package ua.goit.server;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
 abstract public class AbstractHandler implements HttpHandler {
+
+        public static final Logger LOGGER = LogManager.getLogger(AbstractHandler.class);
 
     private TemplateHandler templateHandler = TemplateHandler.getInstance();
 
@@ -33,12 +37,14 @@ abstract public class AbstractHandler implements HttpHandler {
         return templateHandler.getTempLate(getTempLateName());
     }
 
-    protected void handleResponse(HttpExchange exchange) throws IOException {
-        OutputStream outputStream = exchange.getResponseBody();
-        exchange.sendResponseHeaders(200, index.length());
-        outputStream.write(index.getBytes());
-        outputStream.close();
+    protected void handleResponse(HttpExchange exchange) {
+        String body = getTempLate();
+        try(OutputStream outputStream = exchange.getResponseBody()) {
+            exchange.sendResponseHeaders(200, body.length());
+            outputStream.write(body.getBytes());
+        } catch (IOException e) {
+            LOGGER.error("Error while sending response.", e);
+        }
     }
-
 
 }
