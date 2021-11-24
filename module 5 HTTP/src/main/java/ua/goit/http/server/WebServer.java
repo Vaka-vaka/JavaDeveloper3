@@ -11,10 +11,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.goit.http.server.handlers.DevelopersHandler;
-import ua.goit.http.server.handlers.GeneralGetHandler;
-import ua.goit.http.server.handlers.IndexHandler;
-import ua.goit.http.server.handlers.UserHandler;
+import ua.goit.http.server.handlers.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -29,6 +26,7 @@ public class WebServer {
             "/", new IndexHandler(),
             "/users", new UserHandler(),
             "/developers", new DevelopersHandler(),
+            "/developers-view", new DevelopersViewHandler(),
             "/skills", new GeneralGetHandler("skills")
     );
 

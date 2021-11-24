@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class DevelopersHandler extends AbstractHandler {
 
-    private static DevelopersService developersService = DevelopersService.getInstance();
+    private static final DevelopersService developersService = DevelopersService.getInstance();
 
     @Override
     String getTempLateName() {
