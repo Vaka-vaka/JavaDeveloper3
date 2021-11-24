@@ -10,9 +10,8 @@ package ua.goit.console.commands;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.goit.console.Command;
-import ua.goit.dao.DevelopersDao;
 import ua.goit.model.Developers;
-import ua.goit.server.service.DevelopersService;
+import ua.goit.http.server.service.DevelopersService;
 
 import java.util.*;
 import java.util.function.Consumer;

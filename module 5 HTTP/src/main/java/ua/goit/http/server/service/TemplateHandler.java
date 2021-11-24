@@ -5,7 +5,7 @@
  * @version of 18.11.2021
  */
 
-package ua.goit.server.service;
+package ua.goit.http.server.service;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,8 +38,9 @@ public class TemplateHandler {
         String template = getTempLate(templateName);
         final Matcher matcher = pattern.matcher(template);
         while (matcher.find()) {
-            template = template.replace(
-                    matcher.group(0), params.get(matcher.group(1)));
+            String replacer = params.get(matcher.group(1));
+            template = template.replace(matcher.group(0),
+                    replacer == null ? "" : replacer );
         }
        return template;
     }

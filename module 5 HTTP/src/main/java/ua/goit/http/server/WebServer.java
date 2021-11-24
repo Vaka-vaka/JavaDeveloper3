@@ -5,15 +5,16 @@
  * @version of 18.11.2021
  */
 
-package ua.goit.server;
+package ua.goit.http.server;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.goit.server.handlers.GeneralGetHandler;
-import ua.goit.server.handlers.IndexHandler;
-import ua.goit.server.handlers.UserHandler;
+import ua.goit.http.server.handlers.DevelopersHandler;
+import ua.goit.http.server.handlers.GeneralGetHandler;
+import ua.goit.http.server.handlers.IndexHandler;
+import ua.goit.http.server.handlers.UserHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -27,7 +28,7 @@ public class WebServer {
     private final Map<String, HttpHandler> handlers = Map.of(
             "/", new IndexHandler(),
             "/users", new UserHandler(),
-            "/developers", new GeneralGetHandler("developers"),
+            "/developers", new DevelopersHandler(),
             "/skills", new GeneralGetHandler("skills")
     );
 

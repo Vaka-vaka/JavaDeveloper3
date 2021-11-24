@@ -5,7 +5,7 @@
  * @version of 18.11.2021
  */
 
-package ua.goit.server.handlers;
+package ua.goit.http.server.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 

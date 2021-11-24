@@ -5,7 +5,7 @@
  * @version of 23.11.2021
  */
 
-package ua.goit.server.service;
+package ua.goit.http.server.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

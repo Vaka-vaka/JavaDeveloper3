@@ -5,13 +5,13 @@
  * @version of 18.11.2021
  */
 
-package ua.goit.server.handlers;
+package ua.goit.http.server.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.goit.server.service.TemplateHandler;
+import ua.goit.http.server.service.TemplateHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -22,7 +22,7 @@ abstract public class AbstractHandler implements HttpHandler {
 
     public static final Logger LOGGER = LogManager.getLogger(AbstractHandler.class);
 
-    private TemplateHandler templateHandler = TemplateHandler.getInstance();
+    protected TemplateHandler templateHandler = TemplateHandler.getInstance();
 
     abstract String getTempLateName();
 
