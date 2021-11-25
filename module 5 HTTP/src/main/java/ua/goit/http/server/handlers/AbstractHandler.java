@@ -15,8 +15,12 @@ import ua.goit.http.server.service.TemplateHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 abstract public class AbstractHandler implements HttpHandler {
 
@@ -24,7 +28,7 @@ abstract public class AbstractHandler implements HttpHandler {
 
     protected TemplateHandler templateHandler = TemplateHandler.getInstance();
 
-    abstract String getTempLateName();
+   protected abstract String getTempLateName();
 
     protected void get(HttpExchange exchange) {
     }
@@ -42,6 +46,17 @@ abstract public class AbstractHandler implements HttpHandler {
                 post(exchange);
                 break;
         }
+    }
+
+    protected Map<String, String> getUrlParams(HttpExchange exchange) {
+        URI requestURI = exchange.getRequestURI();
+        String query = requestURI.getQuery();
+        if(query == null) {
+            return Collections.emptyMap();
+        }
+        return Arrays.stream(query.split("&"))
+                .map(s -> s.split("="))
+                .collect(Collectors.toMap(k -> k[0], v -> v[1]));
     }
 
     protected void handleResponse(HttpExchange exchange) {
