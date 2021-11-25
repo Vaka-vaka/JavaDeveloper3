@@ -16,7 +16,7 @@ public class UserHandler extends AbstractHandler {
 
 
     @Override
-    String getTempLateName() {
+    protected String getTempLateName() {
         return "users";
     }
 
