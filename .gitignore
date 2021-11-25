@@ -1,4 +1,6 @@
-
+.idea/
+target/
+test/
 .idea/.name
 .idea/compiler.xml
 .idea/dbnavigator.xml
@@ -59,6 +61,6 @@ Module4_JDBC/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_2.xm
 Module4_JDBC/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml
 Module4_JDBC/.idea/libraries/Maven__org_reflections_reflections_0_10_2.xml
 *.target
-
+target/
 module 5 HTTP/target/classes/templates/index.html
 module 5 HTTP/target/classes/templates/users.html
