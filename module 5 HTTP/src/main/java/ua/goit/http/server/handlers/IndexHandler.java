@@ -12,7 +12,7 @@ import com.sun.net.httpserver.HttpExchange;
 public class IndexHandler extends AbstractHandler {
 
     @Override
-    String getTempLateName() {
+    protected String getTempLateName() {
         return "index";
     }
 
