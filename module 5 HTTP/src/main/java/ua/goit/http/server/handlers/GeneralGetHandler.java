@@ -18,7 +18,7 @@ private String templateName;
     }
 
     @Override
-    String getTempLateName() {
+    protected String getTempLateName() {
         return this.templateName;
     }
 
