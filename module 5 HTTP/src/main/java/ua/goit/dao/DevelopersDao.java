@@ -45,14 +45,14 @@ public class DevelopersDao extends AbstractDao<Developers> {
     @Override
     public Optional<Developers> create(Developers entity) {
         String sql = "insert into developers(id, name_, age, gender, salary) values (?, ?, ?, ?, ?)";
-        int count = DbHelper.executeWithPreparedStatement(sql, ps -> {
+        DbHelper.executeWithPreparedStatement(sql, ps -> {
             ps.setLong(1, entity.getId());
             ps.setString(2, entity.getName_());
             ps.setLong(3, entity.getAge());
             ps.setString(4, entity.getGender());
             ps.setInt(5, entity.getSalary());
         });
-        LOGGER.info("Created " + count + " records");
+        LOGGER.info("Record was created");
         return Optional.empty();
     }
 
