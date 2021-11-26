@@ -64,3 +64,4 @@ Module4_JDBC/.idea/libraries/Maven__org_reflections_reflections_0_10_2.xml
 target/
 module 5 HTTP/target/classes/templates/index.html
 module 5 HTTP/target/classes/templates/users.html
+module 5 HTTP/.idea/libraries/Maven__com_google_code_gson_gson_2_8_8.xml
