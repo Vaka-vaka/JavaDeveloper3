@@ -32,7 +32,7 @@ abstract public class AbstractHandler implements HttpHandler {
 
    protected abstract String getTempLateName();
 
-    protected void get(HttpExchange exchange) {
+    protected void get(HttpExchange exchange) throws IOException {
     }
 
     protected void post(HttpExchange exchange) {
