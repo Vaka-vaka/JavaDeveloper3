@@ -8,13 +8,11 @@
 package ua.goit.http.server.handlers.developers;
 
 import com.sun.net.httpserver.HttpExchange;
+import ua.goit.http.server.dto.DevelopersDto;
 import ua.goit.http.server.handlers.AbstractHandler;
 import ua.goit.http.server.service.DevelopersService;
 import ua.goit.model.Developers;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class DevelopersCreateHandler extends AbstractHandler {
@@ -33,12 +31,15 @@ public class DevelopersCreateHandler extends AbstractHandler {
 
     @Override
     protected void post(HttpExchange exchange) {
-       try (InputStream inputStream = exchange.getRequestBody();
-           Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name())) {
-           String next = scanner.next();
-           System.out.println(next);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+          getRequestBody(exchange, DevelopersDto.class)
+                  .ifPresent(developersDto -> {
+                      Developers developers = new Developers();
+                      developers.setId(developersDto.getId());
+                      developers.setName_(developersDto.getName_());
+                      developers.setAge(developersDto.getAge());
+                      developers.setGender(developersDto.getGender());
+                      developers.setSalary(developersDto.getSalary());
+                      developersService.create(developers);
+                  });
     }
 }
