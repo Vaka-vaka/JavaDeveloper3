@@ -7,6 +7,7 @@
 
 package ua.goit.http.server.handlers;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.logging.log4j.LogManager;
@@ -14,12 +15,11 @@ import org.apache.logging.log4j.Logger;
 import ua.goit.http.server.service.TemplateHandler;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.stream.Collectors;
 
 abstract public class AbstractHandler implements HttpHandler {
@@ -27,6 +27,8 @@ abstract public class AbstractHandler implements HttpHandler {
     public static final Logger LOGGER = LogManager.getLogger(AbstractHandler.class);
 
     protected TemplateHandler templateHandler = TemplateHandler.getInstance();
+
+    protected Gson jsonParser = new Gson();
 
    protected abstract String getTempLateName();
 
@@ -57,6 +59,17 @@ abstract public class AbstractHandler implements HttpHandler {
         return Arrays.stream(query.split("&"))
                 .map(s -> s.split("="))
                 .collect(Collectors.toMap(k -> k[0], v -> v[1]));
+    }
+
+    protected <T> Optional <T> getRequestBody(HttpExchange exchange, Class<T>classType) {
+        try (InputStream inputStream = exchange.getRequestBody();
+             Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name())) {
+            String jsonStr = scanner.next();
+           return Optional.of(jsonParser.fromJson(jsonStr, classType));
+        } catch (IOException e) {
+            LOGGER.error("Request body getting error", e);
+        }
+        return Optional.empty();
     }
 
     protected void handleResponse(HttpExchange exchange) {
