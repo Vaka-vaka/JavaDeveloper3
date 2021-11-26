@@ -8,10 +8,12 @@
 package ua.goit.http.server.handlers.developers;
 
 import com.sun.net.httpserver.HttpExchange;
+import ua.goit.http.server.dto.DevelopersDto;
 import ua.goit.http.server.handlers.AbstractHandler;
 import ua.goit.http.server.service.DevelopersService;
 import ua.goit.model.Developers;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -40,9 +42,32 @@ public class DevelopersViewHandler extends AbstractHandler {
             params.put("age", String.valueOf(developers.getAge()));
             params.put("gender", developers.getGender());
             params.put("salary", String.valueOf(developers.getSalary()));
+            params.put("action", "view");
             return params;
         }).ifPresent(params -> {
             handleResponse(exchange, params);
         });
+    }
+
+    @Override
+    protected void post(HttpExchange exchange) {
+        getRequestBody(exchange, DevelopersDto.class)
+                .ifPresent(developersDto -> {
+                    Developers developers = new Developers();
+                    developers.setId(developersDto.getId());
+                    developers.setId(developersDto.getId());
+                    developers.setName_(developersDto.getName_());
+                    developers.setAge(developersDto.getAge());
+                    developers.setGender(developersDto.getGender());
+                    developers.setSalary(developersDto.getSalary());
+                    developersService.update(developers);
+                    exchange.getResponseHeaders().set("Location", "/developers");
+                    try {
+                        exchange.sendResponseHeaders(301, 0L);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    exchange.close();
+                });
     }
 }
