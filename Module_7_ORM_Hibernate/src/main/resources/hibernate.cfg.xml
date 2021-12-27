@@ -16,7 +16,7 @@
 
         <property name="show_sql">true</property>
 
-        <mapping resource="users.hbm.xml"/>
+        <mapping class="ua.goit.model.Users"/>
     </session-factory>
 
 </hibernate-configuration>
