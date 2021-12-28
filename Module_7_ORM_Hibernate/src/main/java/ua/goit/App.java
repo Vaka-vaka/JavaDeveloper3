@@ -1,6 +1,5 @@
 package ua.goit;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -9,9 +8,9 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
+import ua.goit.model.Skills;
 import ua.goit.model.Users;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class App {
@@ -43,10 +42,16 @@ public class App {
 //            list.forEach(System.out::println);
 
             //все юзери метод 2
-            try (Session session = factory.openSession()) {
-                Query<Users> query = session.createNativeQuery("select * from users", Users.class);
-                List<Users> list = query.list();
-                list.forEach(System.out::println);
+//            try (Session session = factory.openSession()) {
+//                Query<Users> query = session.createNativeQuery("select * from users", Users.class);
+//                List<Users> list = query.list();
+//                list.forEach(System.out::println);
+
+//
+        try (Session session = factory.openSession()) {
+            Query<Skills> query = session.createQuery("from Skills", Skills.class);
+            List<Skills> list = query.list();
+            list.forEach(System.out::println);
 
         }
 

@@ -17,6 +17,7 @@
         <property name="show_sql">true</property>
 
         <mapping class="ua.goit.model.Users"/>
+        <mapping class="ua.goit.model.Skills"/>
     </session-factory>
 
 </hibernate-configuration>

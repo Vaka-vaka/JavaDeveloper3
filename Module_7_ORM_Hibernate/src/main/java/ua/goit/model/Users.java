@@ -7,13 +7,16 @@
 
 package ua.goit.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.NamedNativeQueries;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(name = "getAll", query = "from Users"),
+        @NamedQuery(name = "getByName", query = "from Users where name = :name")
+})
 public class Users {
 
     @Id
