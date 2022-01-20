@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <beans  xmlns = "http://www.springframework.org/schema/beans"
+        xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation = "
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
+
+            <!-- определения компонентов здесь -->
+
+            <bean id="messageService" class="ua.goit.MessageServiceImpl"/>
+                <bean id="messageService2" class="ua.goit.MessageServiceImpl2"/>
+
+        <bean id="messagePrinter" class="ua.goit.MessagePrinter">
+            <property name="messageService" ref="messageService2"/>
+        </bean>
+
+    </beans>
