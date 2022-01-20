@@ -42,16 +42,16 @@ public class App {
 //            list.forEach(System.out::println);
 
             //все юзери метод 2
-//            try (Session session = factory.openSession()) {
-//                Query<Users> query = session.createNativeQuery("select * from users", Users.class);
-//                List<Users> list = query.list();
-//                list.forEach(System.out::println);
+            try (Session session = factory.openSession()) {
+                Query<Users> query = session.createNativeQuery("select * from users", Users.class);
+                List<Users> list = query.list();
+                list.forEach(System.out::println);
 
 //
-        try (Session session = factory.openSession()) {
-            Query<Skills> query = session.createQuery("from Skills", Skills.class);
-            List<Skills> list = query.list();
-            list.forEach(System.out::println);
+//        try (Session session = factory.openSession()) {
+//            Query<Skills> query = session.createQuery("from Skills", Skills.class);
+//            List<Skills> list = query.list();
+//            list.forEach(System.out::println);
 
         }
 
