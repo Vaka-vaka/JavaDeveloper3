@@ -21,10 +21,18 @@ public class MainUser {
 
         UserRepository repository = context.getBean(UserRepository.class);
         SkillsRepository skillsRepository = context.getBean(SkillsRepository.class);
-        Optional<Skills> byId = skillsRepository.findById(1L);
-        if(byId.isPresent()) {
-            System.out.println(byId.get().getLevel_skills() + " - "+ byId.get().getLanguage());
+        Optional<Developers> developers = repository.findById(1L);
+        if(developers.isPresent()) {
+            Developers developers1 = developers.get();
+            System.out.println("Name - " + developers1.getName_());
+            developers1.setName_("Valera");
+            repository.save(developers1);
         }
+
+        Optional<Developers> developers2 = repository.findById(1L);
+        if(developers.isPresent()) {
+            Developers developers1 = developers.get();
+            System.out.println("Name after - " + developers1.getName_());
 
 //        Optional<User> byId = repository.findById(1L);
 //        if(byId.isPresent()) {
@@ -33,7 +41,7 @@ public class MainUser {
 //        List<Developers> users = repository.findAll();
 //        users.forEach(System.out::println);
 
-
+        }
     }
 
 }
