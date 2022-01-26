@@ -1,4 +1,4 @@
-package ua.goit.model;
+package ua.goit;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-public class Config {
+public class ConfigModel {
 
     @Bean
     public JdbcTemplate getTemplate(DataSource dataSource) {
@@ -36,7 +36,7 @@ public class Config {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSourse);
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        emf.setPackagesToScan("ua.goit");
+        emf.setPackagesToScan("ua.goit.model");
         return emf;
     }
 
