@@ -8,7 +8,7 @@ import ua.goit.repositories.UserRepository;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterface{
 
     @Autowired
     private UserRepository repository;
