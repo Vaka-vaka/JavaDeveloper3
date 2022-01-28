@@ -1,5 +1,6 @@
-package ua.goit.model.controller;
+package ua.goit.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ua.goit.dto.UserDto;
@@ -30,7 +31,16 @@ public class UserController {
     }
 
     @PostMapping
-    public void create() {
+    public void create(
+           @RequestParam String email,
+            @RequestParam String lastName,
+            @RequestParam String firstName,
+            @RequestParam String password
+    ) {
 
+        System.out.println(email);
+        System.out.println(lastName);
+        System.out.println(firstName);
+        System.out.println(password);
     }
 }

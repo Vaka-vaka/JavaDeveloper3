@@ -1,11 +1,10 @@
-package ua.goit.model.controller;
+package ua.goit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ua.goit.model.User;
 import ua.goit.model.UserDevelopers;
 import ua.goit.services.UserDevelopersService;
 
