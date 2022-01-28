@@ -86,14 +86,5 @@ public class User {
         this.firstName = firstName;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                '}';
-    }
+
 }
