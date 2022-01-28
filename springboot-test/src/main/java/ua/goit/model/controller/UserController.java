@@ -1,8 +1,10 @@
 package ua.goit.model.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ua.goit.dto.UserDto;
 import ua.goit.model.User;
-import ua.goit.model.UserDevelopers;
+import ua.goit.services.UserService;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,20 +13,18 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping
-    public List<User> getAll() {
-        var user = new User();
-        user.setLastName("Valera");
-      //  user.setId(UUID 1);
-        user.setFirstName("Valera");
-        return List.of(user);
+    public List<UserDto> getAll() {
+        return userService.getAll();
     }
 
-    @GetMapping("/{param}")
-    public User get(@PathVariable("param") UUID id) {
+    @GetMapping("/{id}")
+    public User get(@PathVariable UUID id) {
         var user = new User();
         user.setLastName("Vaka");
-        user.setId(id);
         user.setFirstName("Gordon");
         return user;
     }
