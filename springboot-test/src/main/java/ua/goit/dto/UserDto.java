@@ -10,6 +10,6 @@ public class UserDto {
     private String email;
     private  String lastName;
     private String firstName;
-    @JsonIgnore
+    @JsonIgnore //пароль через PostMapping, якщо убрать
     private String password;
 }

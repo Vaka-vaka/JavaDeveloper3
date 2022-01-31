@@ -23,24 +23,23 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User get(@PathVariable UUID id) {
-        var user = new User();
-        user.setLastName("Vaka");
-        user.setFirstName("Gordon");
-        return user;
+    public UserDto get(@PathVariable UUID id) {
+        return userService.get(id);
     }
 
     @PostMapping
-    public void create(
-           @RequestParam String email,
-            @RequestParam String lastName,
-            @RequestParam String firstName,
-            @RequestParam String password
-    ) {
+    public void create(@RequestBody UserDto userDto) {
+        userService.create(userDto);
+        System.out.println(userDto);
+    }
 
-        System.out.println(email);
-        System.out.println(lastName);
-        System.out.println(firstName);
-        System.out.println(password);
+    @PutMapping("/{id}")
+    public void update(@PathVariable UUID id, @RequestBody UserDto userDto) {
+        userService.update(id, userDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable UUID id) {
+        userService.deleete(id);
     }
 }

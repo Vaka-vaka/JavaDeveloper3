@@ -9,6 +9,8 @@ import ua.goit.reposetories.UserDevelopersRepository;
 import ua.goit.reposetories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +34,35 @@ public class UserService {
         return dto;
     }
 
+    public UserDto get(UUID id) {
+        return  userRepository.findById(id)
+                .map(this::convertToDto)
+                .orElseThrow();
+    }
 
+    public void create(UserDto userDto) {
+        var user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(user.getPassword());
+        user.setLastName(userDto.getLastName());
+        user.setFirstName(userDto.getFirstName());
+        userRepository.save(user);
+    }
 
+    public void update(UUID id, UserDto userDto) {
+        userRepository.findById(id)
+                .map(user -> {
+                    user.setEmail(userDto.getEmail());
+                    user.setPassword(userDto.getPassword());
+                    user.setLastName(userDto.getLastName());
+                    user.setFirstName(userDto.getFirstName());
+                    return user;
+                }).ifPresent(user -> {
+                    userRepository.save(user);
+                });
+    }
+
+    public void deleete(UUID id) {
+        userRepository.deleteById(id);
+    }
 }

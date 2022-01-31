@@ -1,5 +1,8 @@
 package ua.goit.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,6 +12,9 @@ import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "users")
 public class User {
@@ -36,7 +42,7 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull(message = "User has minimum one role!")
+  //  @NotNull(message = "User has minimum one role!")
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
             fetch = FetchType.EAGER)
     @JoinTable(
@@ -46,46 +52,6 @@ public class User {
     )
     private List<Roles> roles;
 
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
 
 }
